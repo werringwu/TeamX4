@@ -1,0 +1,27 @@
+#!/bin/sh
+
+#Set Key Index 1
+himm 0x10090008 0x01
+
+#set key0~key7 and CRC16
+himm 0x1009000C 0x11111111
+himm 0x10090010 0x11111111
+himm 0x10090014 0x11111111
+himm 0x10090018 0x11111111
+himm 0x1009001C 0x11111111
+himm 0x10090020 0x11111111
+himm 0x10090024 0x11111111
+himm 0x10090028 0x11111111
+#himm 0x1009002C 0x11111111
+
+#Set mode, write key
+himm 0x10090000 0x02
+
+#start write key to OTP 1
+himm 0x10090004 0x1acce551
+
+sleep 1
+himd.l 0x1009004C
+#should be 0x00001202, Bit2 should be 1.
+
+
